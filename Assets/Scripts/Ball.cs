@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     // This will called the first frame and only once in this object's lifecycle
     private void Start()
     {
-        AddStartingForce();
+        ResetPosition();
     }
 
     private void AddStartingForce()
@@ -31,10 +31,19 @@ public class Ball : MonoBehaviour
     private void FixedUpdate()
     {
         Debug.Log(_rigidBody.velocity.normalized);
-        // _rigidBody.velocity = _rigidBody.velocity.normalized * 15;
+        _rigidBody.velocity = _rigidBody.velocity.normalized * 5;
     }
     public void AddForce(Vector2 force)
     {
         _rigidBody.AddForce(force);
     }
+
+    // Reset the ball when someone scores
+    public void ResetPosition() {
+        // Why vector3? 
+        _rigidBody.position = Vector3.zero;
+        _rigidBody.velocity = Vector3.zero;
+        AddStartingForce();
+    }
+
 }
